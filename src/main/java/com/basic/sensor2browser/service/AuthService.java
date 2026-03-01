@@ -41,10 +41,6 @@ public class AuthService {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-    /**
-     * Registers a new user account after validating that the email address
-     * is not already associated with an existing user.
-     */
     public User signUp(User user) throws EmailAlreadyExistsException {
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
@@ -61,10 +57,6 @@ public class AuthService {
         return userRepository.save(_user);
     }
 
-    /**
-     * Authenticates a user with email and password, then issues a JWT access
-     * token and refresh token encapsulated in a UserDto.
-     */
     @Transactional
     public UserDto signIn(User user) throws ResourceAccessException {
 
@@ -101,10 +93,6 @@ public class AuthService {
     }
 
 
-    /**
-     * Updates mutable fields of the currently authenticated user's profile
-     * (username, email, password) and returns a fresh JWT token set.
-     */
     public UserDto update(User user, MultipartFile image) throws IOException, ResourceNotFoundException {
 
         // Obtain the user's identity from Spring Security
@@ -153,36 +141,21 @@ public class AuthService {
 
     }
 
-    /**
-     * Deletes the user identified by the given id, or throws if the user
-     * cannot be found.
-     */
     public void deleteUser(Integer userId) throws Throwable {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         userRepository.delete(user);
     }
 
-    /**
-     * Returns all users stored in the system.
-     */
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
-    /**
-     * Looks up a user by id, throwing ResourceNotFoundException when no
-     * matching user exists.
-     */
     public User findUserById(Integer userId) throws ResourceNotFoundException {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
-    /**
-     * Resolves a user's id by email address, throwing ResourceNotFoundException
-     * if no user with that email exists.
-     */
     public Long findUserIdByEmail(String email) throws ResourceNotFoundException {
         java.util.Optional<User> optionalUser = userRepository.findByEmail(email);
         if (optionalUser.isEmpty()) {
