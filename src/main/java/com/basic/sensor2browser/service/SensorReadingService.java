@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Application service that encapsulates persistence operations
+ * Application service that handles save operations
  * for SensorReading entities.
  */
 @Service
@@ -19,10 +19,17 @@ public class SensorReadingService {
         this.sensorReadingRepository = sensorReadingRepository;
     }
 
+    /**
+     * Save the given SensorReading entity and returns the managed
+     * instance from the repository.
+     */
     public SensorReading save(SensorReading sensorReading) {
         return sensorReadingRepository.save(sensorReading);
     }
 
+    /**
+     * Retrieves all sensor readings currently stored in the database.
+     */
     public List<SensorReading> findAll() {
         return sensorReadingRepository.findAll();
     }

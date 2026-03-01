@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  * JPA entity representing a single sensor reading produced by an MCU,
- * including the owning MCU, sensor name, measured value, and timestamp.
+ * including the parent MCU, sensor name, measured value, and timestamp.
  */
 @Entity
 public class SensorReading {

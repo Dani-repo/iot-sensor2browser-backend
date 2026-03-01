@@ -8,10 +8,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-// 'mcus' table ; a JPA entity
+/**
+ * JPA entity representing a microcontroller unit (MCU) device that owns sensor
+ * readings and is associated with one or more SensorReading records.
+ */
 @Entity
-@Table(name="mcus")
-
+@Table(name = "mcus")
 public class Mcu {
 
     @Id

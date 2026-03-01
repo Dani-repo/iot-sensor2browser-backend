@@ -17,6 +17,10 @@ public class McuService {
         this.mcuRepository = mcuRepository;
     }
 
+    /**
+     * Returns an existing MCU if one is present, otherwise creates and
+     * persists a default MCU record to associate incoming readings with.
+     */
     public Mcu getOrCreateDefaultMcu() {
         return mcuRepository.findAll()
                 .stream()
